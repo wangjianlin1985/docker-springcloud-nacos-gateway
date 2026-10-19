@@ -1,0 +1,17 @@
+﻿FROM java:8-alpine没维护了需要修改为：FROM eclipse-temurin:8-jre-alpine
+nacos的镜像最新版不兼容需要修改为：    image: nacos/nacos-server:v2.2.0
+
+mysql数据太大了我直接删除了，保存了mysql脚本，自行导入即可
+
+一键启动集群所有容器：
+docker-compose up -d
+查看所有容器日志命令：
+docker-compose logs -f
+查看指定容器日志命令：
+docker-compose logs -f userservice
+【解决nacos启动晚于业务微服务】重启微服务容器：
+docker-compose restart userservice orderservice gateway
+
+访问地址：
+http://192.168.1.10:10010/user/2?authorization=admin
+http://192.168.1.10:10010/order/102?authorization=admin
